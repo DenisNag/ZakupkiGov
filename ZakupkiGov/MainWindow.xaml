@@ -1,0 +1,92 @@
+﻿<Window x:Class="ZakupkiGov.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZakupkiGov"
+        xmlns:enums="clr-namespace:ZakupkiGov.Enums"
+        mc:Ignorable="d"
+        Title="Loading numbers" Height="450" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Номера" VerticalAlignment="Center" />
+        <TextBox Grid.Row="2" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"  x:Name="NumbersTextBox"/>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto "/>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="30" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Путь к файлу эксель" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="2" x:Name="ExcelFilePathTextBox" IsReadOnly="true" />
+            <Button Grid.Row="0" Grid.Column="4" x:Name="OpenExcelFilePathButton" Content="..." Click="OpenExcelFilePathButton_Click" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Путь к папкам документации" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="2" x:Name="DirectoryTextBox" IsReadOnly="true" />
+            <Button Grid.Row="2" Grid.Column="4" x:Name="OpenDirectoryButton" Content="..." Click="OpenDirectoryButton_Click" />
+
+            <!--<TextBox Grid.Row="4" Grid.ColumnSpan="5" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="LogTextBox"  />-->
+
+            <RichTextBox Grid.Row="4" Grid.ColumnSpan="5" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="LogTextBox" Block.LineHeight="2" />
+
+            <ProgressBar Grid.Row="6" Grid.ColumnSpan="5" Minimum="0" Maximum="100" Value="{Binding Path=PercentSucceed, Mode=OneWay}" />
+
+            <Button Grid.ColumnSpan="5" Grid.Row="8" Width="100" x:Name="ParseButton" Click="ParseButton_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=State}" Value="{x:Null}">
+                                <Setter Property="Content" Value="Старт" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=State}" Value="{x:Static enums:ProcessStates.NONE}">
+                                <Setter Property="Content" Value="Старт" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=State}" Value="{x:Static enums:ProcessStates.WORKING}">
+                                <Setter Property="Content" Value="Стоп" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=State}" Value="{x:Static enums:ProcessStates.STOPPING}">
+                                <Setter Property="Content" Value="Останавливается" />
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+
+        <!--<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Номера" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" Margin="10,41,10,0" TextWrapping="Wrap" Text="" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="147" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,209,0,194" TextWrapping="Wrap" Text="Путь к файлу" d:LayoutOverrides="Height"/>
+        <TextBox x:Name="textBox1" Margin="142,208,53,188" TextWrapping="Wrap" Text="Что-то.xlxs"/>
+        <Button x:Name="button" Content="..." HorizontalAlignment="Right" Margin="0,209,10,190" Width="29" d:LayoutOverrides="Height"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,0,0,153" TextWrapping="Wrap" Text="Директория номеров" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="textBox1_Copy" Margin="142,0,53,146" TextWrapping="Wrap" Text="C://Что-то/Номер/" Height="23" VerticalAlignment="Bottom"/>
+        <Button x:Name="button_Copy" Content="..." HorizontalAlignment="Right" Margin="0,0,10,149" Width="29" RenderTransformOrigin="0.509,2.949" VerticalAlignment="Bottom"/>
+        <Button x:Name="button1" Content="Парсить" Margin="294,0,318,103" VerticalAlignment="Bottom"/>-->
+
+    </Grid>
+</Window>
